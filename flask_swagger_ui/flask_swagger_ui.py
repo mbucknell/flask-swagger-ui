@@ -3,7 +3,7 @@ import json
 from flask import Blueprint, send_from_directory, render_template, url_for
 
 
-def get_swaggerui_blueprint(base_url, api_url=None, api_view_func=None, config=None):
+def get_swaggerui_blueprint(api_url=None, api_view_func=None, config=None):
 
     swagger_ui = Blueprint('swagger_ui',
                            __name__,
@@ -27,7 +27,6 @@ def get_swaggerui_blueprint(base_url, api_url=None, api_view_func=None, config=N
 
     fields = {
         # Some fields are used in functions etc, so we treat them special
-        'base_url': base_url,
         'api_url': api_url,
         'app_name': default_config.pop('app_name'),
         'client_realm': default_config.pop('client_realm'),
