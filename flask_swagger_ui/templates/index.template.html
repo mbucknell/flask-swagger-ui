@@ -76,7 +76,6 @@
       var user_config = {{config_json|safe}};  // User config options provided from Python code
 
       for (var attrname in user_config) { config[attrname] = user_config[attrname]; }
-      console.log(config);
       window.swaggerUi = new SwaggerUi(config);
 
       window.swaggerUi.load();
