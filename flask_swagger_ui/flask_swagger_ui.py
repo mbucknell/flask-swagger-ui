@@ -1,9 +1,9 @@
 import os
 import json
-from flask import Blueprint, send_from_directory, render_template
+from flask import Blueprint, send_from_directory, render_template, url_for
 
 
-def get_swaggerui_blueprint(base_url, api_url, config=None):
+def get_swaggerui_blueprint(base_url, api_url=None, api_view_func=None, config=None):
 
     swagger_ui = Blueprint('swagger_ui',
                            __name__,
@@ -42,6 +42,8 @@ def get_swaggerui_blueprint(base_url, api_url, config=None):
     @swagger_ui.route('/<path:path>')
     def show(path=None):
         if not path or path == 'index.html':
+            if not api_url:
+                fields['api_url'] = url_for(api_view_func)
             return render_template('index.template.html', **fields)
         else:
             return send_from_directory(
